@@ -1,12 +1,89 @@
+
 import Layout from '../components/Layout'
-import Link from 'next/link'
-export default function Home() {
+import ActionCard from '../components/ActionCard'
+import ArticleCard from '../components/ArticleCard'
+import FriendsCard from '../components/FriendsCard'
+import { useEffect, useRef, useState } from 'react'
+import axios from 'axios'
+import InfiniteScroll from 'react-infinite-scroll-component';
+import PlaceholderCard from '../components/PlaceholderCard';
+import 'react-virtualized/styles.css'
+
+
+
+
+function Home() {
+  const [articles, setArticles] = useState([])
+
+  useEffect(() => {
+    
+    fetchData();
+  }, [])
+
+  const fetchData = () => {
+
+    if (!navigator.onLine) {
+      alert("You are Offline")
+      return
+    }
+
+    axios.get(`${process.env.API_ROOT}/photos/random?client_id=${process.env.ACCESS_KEY}&count=10`)
+      .then(res =>
+        setArticles([...articles, ...res.data])
+      )
+
+  }
+  console.log('articles', articles)
   return (
     <>
       <Layout title="Home">
-        <h1 className="text-green-500 text-semibold text-center text-6xl my-auto h-full w-full">Next.js + Tailwindcss Home😅</h1>
-        <Link href='/about'><h1 className="text-green-500 cursor-pointer text-semibold text-center text-2xl my-auto h-full w-full">About</h1></Link>
+        <section>
+          {/* Flex */}
+          <div className='flex'>
+            {/* Left */}
+            <div className="flex-1 hidden sm:block">
+              <ActionCard />
+            </div>
+            {/* Mid */}
+            <div className="flex-initial mr-2 ml-2 mx-auto">
+              <InfiniteScroll
+                dataLength={articles.length} //This is important field to render the next data
+                next={fetchData}
+                hasMore={true}
+                loader={<PlaceholderCard />}
+                endMessage={
+                  <p style={{ textAlign: 'center' }}>
+                    <b>Yay! You have seen it all</b>
+                  </p>
+                }
+              >
+                <div>
+                  {articles.map((article) => (
+                    <ArticleCard
+                      articleAvatar={article.user.profile_image.medium}
+                      articleDate="2020"
+                      articleDescription={article.alt_description}
+                      articleImage={article.urls.regular}
+                      articleUserName={article.user.first_name + article.user.last_name}
+                      key={article.id}
+                    />
+                  ))}
+                </div>
+              </InfiniteScroll>
+            </div>
+            {/* Right */}
+            <div className="flex-1 hidden sm:block">
+              <FriendsCard />
+            </div>
+          </div>
+        </section>
       </Layout>
     </>
   )
 }
+
+
+
+
+
+export default Home;

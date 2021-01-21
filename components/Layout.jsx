@@ -6,7 +6,7 @@ export default function layout({ title, children }) {
             <Head>
                 <title>Title | {title}</title>
             </Head>
-            <main>
+            <main className="mt-2 w-full 2xl:w-8/12 m-auto">
                 {children}
             </main>
         </div>

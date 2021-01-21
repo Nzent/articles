@@ -1,0 +1,28 @@
+  <AutoSizer >
+                {({ height, width }) => (
+                  <List
+                    className="focus:outline-none"
+                    width={width}
+                    height={height}
+                    rowHeight={cahe.current.rowHeight}
+                    deferredMeasurementCache={cahe.current}
+                    rowCount={props.length}
+                    rowRenderer={({ key, index, style, parent }) => {
+                      const article = props[index];
+                      return (
+                        <CellMeasurer
+                          key={key}
+                          cache={cahe.current}
+                          parent={parent}
+                          columnIndex={0}
+                          rowIndex={index}
+                        >
+                          {/* <div style={style}>{article.thumbnailUrl}</div> */}
+                          <div style={style}>
+                            <ArticleCard articleAvatar={article.thumbnailUrl} articleDate="2020" articleDescription={article.title} articleImage={article.url} articleName={article.albumId} />
+                          </div>
+                        </CellMeasurer>
+                      )
+                    }} />
+                )}
+              </AutoSizer>

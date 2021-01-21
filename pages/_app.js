@@ -1,5 +1,7 @@
 import '../styles/globals.css'
 import "tailwindcss/tailwind.css";
+// remix icons
+import 'remixicon/fonts/remixicon.css'
 import Router from 'next/router'
 import nProgress from 'nprogress';
 // NProgress

@@ -7,7 +7,7 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <Html lang="en">
+            <Html lang="en" className="bg-gray-200 font-sans">
                 <Head>
                     <link rel="icon" href="/favicon.ico" />
                     {/* NProgress */}
