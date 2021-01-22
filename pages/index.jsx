@@ -23,23 +23,23 @@ function Home() {
   const fetchData = () => {
 
     if (!navigator.onLine) {
-      alert("You are Offline")
+      alert("You are OFFLINE")
       return
     }
 
     // Unsplash 
     
-    // axios.get(`${process.env.API_ROOT}/pphotos/random?client_id=${process.env.ACCESS_KEY}&count=10`)
-    //   .then(res =>
-    //     setArticles([...articles, ...res.data])
-    //   )
-
-    // GraphCMS api
-    
-    axios.get(``)
+    axios.get(`${process.env.API_ROOT}/photos/random?client_id=${process.env.ACCESS_KEY}&count=10`)
       .then(res =>
         setArticles([...articles, ...res.data])
       )
+
+    // GraphCMS api
+    
+    // axios.get(``)
+    //   .then(res =>
+    //     setArticles([...articles, ...res.data])
+    //   )
   }
   console.log('articles', articles)
   return (
