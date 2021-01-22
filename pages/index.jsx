@@ -16,7 +16,7 @@ function Home() {
   const [articles, setArticles] = useState([])
 
   useEffect(() => {
-    
+
     fetchData();
   }, [])
 
@@ -27,11 +27,19 @@ function Home() {
       return
     }
 
-    axios.get(`${process.env.API_ROOT}/photos/random?client_id=${process.env.ACCESS_KEY}&count=10`)
+    // Unsplash 
+    
+    // axios.get(`${process.env.API_ROOT}/pphotos/random?client_id=${process.env.ACCESS_KEY}&count=10`)
+    //   .then(res =>
+    //     setArticles([...articles, ...res.data])
+    //   )
+
+    // GraphCMS api
+    
+    axios.get(``)
       .then(res =>
         setArticles([...articles, ...res.data])
       )
-
   }
   console.log('articles', articles)
   return (

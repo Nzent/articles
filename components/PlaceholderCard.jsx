@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 export default function ArticleCard() {
     return (
-        <div className="bg-white rounded-md shadow-md w-full md:w-10/12 m-auto mb-2">
+        <div className="bg-white rounded-md shadow-md w-96 m-auto mb-2">
             {/* Media */}
             <div><div class="rounded-t-md bg-gray-300 h-72 w-full animate-pulse"></div></div>
             {/* Body */}
